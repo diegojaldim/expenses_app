@@ -11,15 +11,32 @@ void main() {
 class ExpensesApp extends StatelessWidget {
 
   const ExpensesApp({Key? key}) : super(key: key);
-
+//Theme.of(context).textTheme.headline6
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.amber[700]
+        accentColor: Colors.amber[700],
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+          headline6: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          )
+        ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+            headline6: const TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )
+          )
+        )
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
