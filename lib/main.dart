@@ -56,12 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transactions.add(newTransaction);
     });
+
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (_) {
         return TransactionForm(_addTransaction);
       },
     );
