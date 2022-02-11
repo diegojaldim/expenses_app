@@ -10,40 +10,34 @@ void main() {
 }
 
 class ExpensesApp extends StatelessWidget {
-
   const ExpensesApp({Key? key}) : super(key: key);
 //Theme.of(context).textTheme.headline6
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber[700],
-        fontFamily: 'Quicksand',
-        textTheme: ThemeData.light().textTheme.copyWith(
-          headline6: const TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          )
-        ),
-        appBarTheme: AppBarTheme(
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber[700],
+          fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-            headline6: const TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            )
-          )
-        )
-      ),
+                  headline6: const TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              )),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                      headline6: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )))),
       home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
@@ -51,37 +45,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final List<Transaction> _transactions = [
     Transaction(
-      id: 't1', 
-      title: 'Novo Tenis de Corrida', 
-      value: 310.76, 
-      date: DateTime.now().subtract(const Duration(days: 3))
-    ),
+        id: 't1',
+        title: 'Novo Tenis de Corrida',
+        value: 310.76,
+        date: DateTime.now().subtract(const Duration(days: 3))),
     Transaction(
-      id: 't2', 
-      title: 'Conta de Luz', 
-      value: 260.99, 
-      date: DateTime.now()
-    ),
+        id: 't2', title: 'Conta de Luz', value: 260.99, date: DateTime.now()),
   ];
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
-      return tr.date.isAfter(DateTime.now().subtract(
-        const Duration(days: 7))
-      );
+      return tr.date.isAfter(DateTime.now().subtract(const Duration(days: 7)));
     }).toList();
   }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
-      id: Random().nextDouble().toString(),
-      title: title, 
-      value: value, 
-      date: DateTime.now().subtract(const Duration(days: 3))
-    );
+        id: Random().nextDouble().toString(),
+        title: title,
+        value: value,
+        date: DateTime.now().subtract(const Duration(days: 3)));
 
     setState(() {
       _transactions.add(newTransaction);
@@ -106,23 +91,18 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Despesas Pessoais'),
         actions: [
           IconButton(
-            onPressed: () {
-              _openTransactionFormModal(context);
-            },
-            icon: const Icon(Icons.add)
-          )
+              onPressed: () {
+                _openTransactionFormModal(context);
+              },
+              icon: const Icon(Icons.add))
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(
-              _recentTransactions
-            ),
-            TransactionList(
-              _transactions
-            ),
+            Chart(_recentTransactions),
+            TransactionList(_transactions),
           ],
         ),
       ),
